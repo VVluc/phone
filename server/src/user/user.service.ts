@@ -33,7 +33,7 @@ export class UserService {
     const exist = await this.usersRepository.findOneBy({
       username: createUserDto.username,
     });
-    if (exist) throw new BadRequestException('username already exist');
+    if (exist) throw new BadRequestException('userten da ton tai ');
 
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
@@ -43,7 +43,7 @@ export class UserService {
 
     return this.usersRepository.save(createUserDto).then((res) => ({
       statusCode: HttpStatus.CREATED,
-      message: 'Register success',
+      message: 'dang ki thanh cong',
     }));
   }
 
@@ -51,7 +51,7 @@ export class UserService {
     const exist = await this.usersRepository.findOneBy({
       username: createEmployeeDto.username,
     });
-    if (exist) throw new BadRequestException('username already exist');
+    if (exist) throw new BadRequestException('userten da ton tai ');
 
     const hashedPassword = await bcrypt.hash(
       createEmployeeDto.password,
@@ -61,7 +61,7 @@ export class UserService {
 
     return this.usersRepository.save(createEmployeeDto).then((res) => ({
       statusCode: HttpStatus.CREATED,
-      message: 'Register success',
+      message: 'dang ki thanh cong',
     }));
   }
 
@@ -73,7 +73,7 @@ export class UserService {
     queryBuilder
       .where([
         {
-          id: Raw((alias) => `CAST(${alias} as char(20)) Like '%${name}%'`), // Ép id kiểu int thành string, tìm kiếm gần giống
+          id: Raw((alias) => `CAST(${alias} as char(20)) Like '%${name}%'`), // Ép id kiểu int thành string
         },
         {
           username: Like(`%${name}%`),
@@ -83,7 +83,7 @@ export class UserService {
         role1: Role.Manager,
         role2: Role.Employee,
       })
-      .orderBy('user.updatedDate', 'DESC'); // Or whatever you need to do
+      .orderBy('user.updatedDate', 'DESC');
 
     return paginate<User>(queryBuilder, options);
   }
@@ -91,7 +91,7 @@ export class UserService {
   async findOne(id: number): Promise<User> {
     const exist = await this.usersRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('User not found.');
+      throw new NotFoundException('User khong tim thay');
     }
 
     return exist;
@@ -100,7 +100,7 @@ export class UserService {
   async findByName(username: string): Promise<User> {
     const exist = await this.usersRepository.findOneBy({ username });
     if (!exist) {
-      throw new NotFoundException('User not found.');
+      throw new NotFoundException('User khong tim thay');
     }
 
     return exist;
@@ -109,19 +109,19 @@ export class UserService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     const exist = await this.usersRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('User not found.');
+      throw new NotFoundException('User khong tim thay');
     }
 
     return this.usersRepository.update(id, updateUserDto).then((res) => ({
       statusCode: HttpStatus.OK,
-      message: 'Update success',
+      message: 'cap nhat thanh cong',
     }));
   }
 
   async updateAccount(id: number, updateAccountDto: UpdateAccountDto) {
     const exist = await this.usersRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('User not found.');
+      throw new NotFoundException('User khong tim thay');
     }
 
     const hashedPassword = await bcrypt.hash(
@@ -132,7 +132,7 @@ export class UserService {
 
     return this.usersRepository.update(id, updateAccountDto).then((res) => ({
       statusCode: HttpStatus.OK,
-      message: 'Update success',
+      message: 'cap nhat thanh cong',
     }));
   }
 
@@ -143,11 +143,11 @@ export class UserService {
       user.password,
     );
     if (!result) {
-      throw new BadRequestException('Password not exactly');
+      throw new BadRequestException('Password khong chinh xac');
     }
 
     if (updatePasswordDto.newPass !== updatePasswordDto.confirmPass) {
-      throw new BadRequestException('Confirm password not equal new password');
+      throw new BadRequestException('password khong khop');
     }
 
     const hashedPassword = await bcrypt.hash(
@@ -159,19 +159,19 @@ export class UserService {
       .update(updatePasswordDto.userId, { password: hashedPassword })
       .then((res) => ({
         statusCode: HttpStatus.OK,
-        message: 'Update password success',
+        message: 'cap nhat password thanh cong',
       }));
   }
 
   async remove(id: number) {
     const exist = await this.usersRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('User not found.');
+      throw new NotFoundException('User khong tim thay');
     }
 
     return this.usersRepository.delete(id).then((res) => ({
       statusCode: HttpStatus.OK,
-      message: 'Delete success',
+      message: 'xoa thanh cong',
     }));
   }
 }

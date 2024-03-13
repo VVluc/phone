@@ -20,7 +20,6 @@ import useAuth from '../../../libs/hooks/useAuth';
 import { useAdminOrders } from '../../../libs/swr/useAdminOrders';
 import { OrderType } from '../../../types';
 
-// Badge component will be available as part of the core library soon
 export const StyledBadge = styled('span', {
   display: 'inline-block',
   textTransform: 'uppercase',

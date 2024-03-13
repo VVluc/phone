@@ -12,7 +12,7 @@ import useAuth from '../libs/hooks/useAuth';
 import useMediaQuery from '../libs/hooks/useMediaQuery';
 import { clearCart, selectCart, updateCart } from '../libs/redux/reducers/cartReducer';
 import { useAppDispatch, useAppSelector } from '../libs/redux/store';
-import { useCities } from '../libs/swr/useCities';
+// import { useCities } from '../libs/swr/useCities';
 import { CartItemType, CityType, DistrictType, WardType } from '../types';
 import { CustomCartItemType, useCheckVariantIds } from './cart';
 
@@ -52,8 +52,6 @@ const Summary = () => {
 
   const disabled = fullName && phone && address && city && district && ward && cartItems.length > 0;
 
-  // Track the product is still visible or not
-  // If not -> update cart
   useEffect(() => {
     if (data) {
       const ids = data?.map(i => i.id);
@@ -167,7 +165,7 @@ const Summary = () => {
 };
 
 const Payment = () => {
-  const { control } = useFormContext(); // retrieve all hook methods
+  const { control } = useFormContext();
 
   return (
     <Card>
@@ -187,12 +185,6 @@ const Payment = () => {
               <Radio color="secondary" value="COD" size="xs" type="radio">
                 Trả tiền mặt khi nhận hàng (COD)
               </Radio>
-              {/* <Radio color="secondary" value="ZALOPAY" size="xs">
-                Thanh toán qua Zalo Pay
-              </Radio> */}
-              {/* <Radio color='secondary' value='MOMO' size='xs'>
-                Thanh toán qua Momo
-              </Radio> */}
             </Radio.Group>
           )}
         />
@@ -203,31 +195,31 @@ const Payment = () => {
 
 const Info = () => {
   const { register, control, setValue } = useFormContext();
-  const { data: cities } = useCities();
-  const [districts, setDistricts] = useState<DistrictType[]>([]);
-  const [wards, setWards] = useState<WardType[]>([]);
+  // const { data: cities } = useCities();
+  // const [districts, setDistricts] = useState<DistrictType[]>([]);
+  // const [wards, setWards] = useState<WardType[]>([]);
 
-  const citiesOption = cities?.map(c => ({
-    value: c.code,
-    label: c.name,
-  }));
+  // const citiesOption = cities?.map(c => ({
+  //   value: c.code,
+  //   label: c.name,
+  // }));
 
-  const wardsOption = wards?.map(c => ({
-    value: c.code,
-    label: c.name,
-  }));
+  // const wardsOption = wards?.map(c => ({
+  //   value: c.code,
+  //   label: c.name,
+  // }));
 
-  const districtsOption = districts?.map(c => ({
-    value: c.code,
-    label: c.name,
-  }));
+  // const districtsOption = districts?.map(c => ({
+  //   value: c.code,
+  //   label: c.name,
+  // }));
 
   const handleChangeCity = async (onChange: (...event: any[]) => void, e: any) => {
     try {
       onChange(e);
-      const res = await axios.get<CityType>('https://provinces.open-api.vn/api/p/' + e.value + '?depth=2');
+      // const res = await axios.get<CityType>('https://provinces.open-api.vn/api/p/' + e.value + '?depth=2');
       setValue('district', null);
-      setDistricts(res.data.districts);
+      // setDistricts(res.data.districts);
       setValue('ward', null);
       setWards([]);
     } catch (error) {
@@ -238,8 +230,8 @@ const Info = () => {
   const handleChangeDistrict = async (onChange: (...event: any[]) => void, e: any) => {
     try {
       onChange(e);
-      const res = await axios.get<DistrictType>('https://provinces.open-api.vn/api/d/' + e.value + '?depth=2');
-      setWards(res.data.wards);
+      // const res = await axios.get<DistrictType>('https://provinces.open-api.vn/api/d/' + e.value + '?depth=2');
+      // setWards(res.data.wards);
       setValue('ward', null);
     } catch (error) {
       console.log(error);
@@ -293,23 +285,11 @@ const Info = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                // <MySelect
-                //   placeholder='Chọn thành phố'
-                //   label='Tỉnh/ Thành phố'
-                //   options={citiesOption}
-                //   value={field.value}
-                //   onChange={(e: any) => handleChangeCity(field.onChange, e)}
-                //   innerRef={field.ref}
-                //   minW={360}
-                // />
                 <Input
                   placeholder="Chọn thành phố"
                   label="Tỉnh/ Thành phố"
-                  // options={citiesOption}
                   value={field.value}
                   onChange={(e: any) => handleChangeCity(field.onChange, e)}
-                  // innerRef={field.ref}
-                  // minW={360}
                 />
               )}
             />
@@ -320,23 +300,11 @@ const Info = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                // <MySelect
-                //   placeholder='Chọn Quận/Huyện'
-                //   label='Quận/ Huyện'
-                //   // options={districtsOption}
-                //   // value={field.value}
-                //   // onChange={(e: any) => handleChangeDistrict(field.onChange, e)}
-                //   // innerRef={field.ref}
-                //   minW={360}
-                // />
                 <Input
                   placeholder="Chọn Quận/Huyện"
                   label="Quận/ Huyện"
-                  // options={districtsOption}
                   value={field.value}
                   onChange={(e: any) => handleChangeDistrict(field.onChange, e)}
-                  // innerRef={field.ref}
-                  // minW={360}
                 />
               )}
             />
@@ -347,24 +315,7 @@ const Info = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                // <MySelect
-                //   placeholder='Chọn Phường/Xã'
-                //   label='Phường/ Xã'
-                //   options={wardsOption}
-                //   value={field.value}
-                //   onChange={field.onChange}
-                //   innerRef={field.ref}
-                //   minW={360}
-                // />
-                <Input
-                  placeholder="Chọn Phường/Xã"
-                  label="Phường/ Xã"
-                  // options={wardsOption}
-                  value={field.value}
-                  onChange={field.onChange}
-                  // innerRef={field.ref}
-                  // minW={360}
-                />
+                <Input placeholder="Chọn Phường/Xã" label="Phường/ Xã" value={field.value} onChange={field.onChange} />
               )}
             />
           </Grid>
@@ -502,7 +453,6 @@ export default function Checkout() {
             css={{
               textAlign: 'center',
               color: '#DB2612',
-              // textGradient: '45deg, $redred600 50%, $yellow500 100%',
             }}
             weight="medium"
           >

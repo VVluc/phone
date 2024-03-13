@@ -21,16 +21,16 @@ export class CategoryService {
     const name = await this.categoriesRepository.findOneBy({
       name: createCategoryDto.name,
     });
-    if (name) throw new BadRequestException('Name already exist');
+    if (name) throw new BadRequestException('ten da ton tai');
 
     const slug = await this.categoriesRepository.findOneBy({
       slug: createCategoryDto.slug,
     });
-    if (slug) throw new BadRequestException('Slug already exist');
+    if (slug) throw new BadRequestException('Slug da ton tai');
 
     return this.categoriesRepository.save(createCategoryDto).then((res) => ({
       statusCode: HttpStatus.CREATED,
-      message: 'Register success',
+      message: 'dang ki thanh cong',
     }));
   }
 
@@ -51,7 +51,7 @@ export class CategoryService {
       where: { slug, isActive: true },
     });
     if (!exist) {
-      throw new NotFoundException('Category not found.');
+      throw new NotFoundException('khong tim thay');
     }
     return exist;
   }
@@ -61,7 +61,7 @@ export class CategoryService {
       where: { id },
     });
     if (!exist) {
-      throw new NotFoundException('Category not found.');
+      throw new NotFoundException('khong tim thay');
     }
 
     return exist;
@@ -70,7 +70,7 @@ export class CategoryService {
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
     const exist = await this.categoriesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Category not found.');
+      throw new NotFoundException('khong tim thay');
     }
     const name = await this.categoriesRepository
       .createQueryBuilder('category')
@@ -80,7 +80,7 @@ export class CategoryService {
       })
       .getOne();
 
-    if (name) throw new BadRequestException('Name already exist');
+    if (name) throw new BadRequestException('ten da ton tai ');
 
     const slug = await this.categoriesRepository
       .createQueryBuilder('category')
@@ -89,13 +89,13 @@ export class CategoryService {
         slugExist: exist.slug,
       })
       .getOne();
-    if (slug) throw new BadRequestException('Slug already exist');
+    if (slug) throw new BadRequestException('Slug da ton tai');
 
     return this.categoriesRepository
       .update(id, updateCategoryDto)
       .then((res) => ({
         statusCode: HttpStatus.OK,
-        message: 'Update success',
+        message: 'cap nhat thanh cong',
       }))
       .catch((err) => console.log(err));
   }
@@ -103,12 +103,12 @@ export class CategoryService {
   async remove(id: number) {
     const exist = await this.categoriesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Category not found.');
+      throw new NotFoundException('khong tim thay');
     }
 
     return this.categoriesRepository.delete({ id }).then((res) => ({
       statusCode: HttpStatus.OK,
-      message: 'Delete success',
+      message: 'xoa thanh cong',
     }));
   }
 }

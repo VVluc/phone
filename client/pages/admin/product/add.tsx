@@ -157,12 +157,10 @@ export default function Add() {
 
     const category = { id: data.category.value };
 
-    // Check if product have multi variant
     let variants: any = [{ price, quantity, attributeValues: [] }];
     let noAttributes = false;
     if (isVariants) {
       variants = data.variants.map(i => {
-        // Check if attributes is empty
         if (i.attributeValues.length === 0) {
           noAttributes = true;
         }
@@ -200,7 +198,6 @@ export default function Add() {
         url: d.secure_url,
       }));
 
-      // Remove unnecessary attributes
       const { image1, image2, image3, image4, image5, image6, image7, ...newData } = data;
       const postData = { ...newData, category, variants, images: postImg };
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/product`, postData, {
@@ -646,7 +643,6 @@ const CategorySelect = (props: any) => {
       {...props}
       value={props.value ? props.value : null}
       options={category}
-      // menuPortalTarget={document.querySelector('body')}
       menuPortalTarget={document.body}
       menuPosition={'fixed'}
       components={{
@@ -743,7 +739,6 @@ const AttributeSelect = (props: any) => {
   const handleChange = (selectedOption: any) => {
     props.onChange(selectedOption);
 
-    // if selection of a group is selected then remove that group
     let newGroupedOptions = [];
     newGroupedOptions = originalOptions?.filter((e: any) => {
       const found = e.options.find((k: any) => {

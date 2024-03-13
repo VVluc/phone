@@ -128,8 +128,8 @@ export default function Update() {
             (getValues(`image${index + 1}` as keyof FormValues) as FileList).length > 0
           ) {
             const img = (getValues(`image${index + 1}` as keyof FormValues) as FileList)[0];
-            const resUploaded = await uploadImg(img); // upload new img to cloud
-            await deleteImg(product?.images[index].publicId); // delete old img in cloud
+            const resUploaded = await uploadImg(img);
+            await deleteImg(product?.images[index].publicId);
             const newImg = {
               id: product.images[index].id,
               publicId: resUploaded.public_id,
@@ -142,7 +142,7 @@ export default function Update() {
             (getValues(`image${index + 1}` as keyof FormValues) as FileList).length > 0
           ) {
             const img = (getValues(`image${index + 1}` as keyof FormValues) as FileList)[0];
-            const resUploaded = await uploadImg(img); // upload new img to cloud
+            const resUploaded = await uploadImg(img);
             const newImg = {
               publicId: resUploaded.public_id,
               url: resUploaded.secure_url,
@@ -152,14 +152,13 @@ export default function Update() {
             getValues(`image${index + 1}` as keyof FormValues) &&
             instanceOfImageType(getValues(`image${index + 1}` as keyof FormValues))
           ) {
-            // images.push(getValues(`image${index + 1}` as keyof FormValues));
             return getValues(`image${index + 1}` as keyof FormValues);
           } else if (
             product.images[index] &&
             getValues(`image${index + 1}` as keyof FormValues) instanceof FileList &&
             (getValues(`image${index + 1}` as keyof FormValues) as FileList).length == 0
           ) {
-            await deleteImg(product?.images[index].publicId); // delete old img in cloud
+            await deleteImg(product?.images[index].publicId);
             return undefined;
           }
         })
@@ -194,12 +193,10 @@ export default function Update() {
 
     const newCategory = { id: data.category.value };
 
-    // Check if product have multi variant
     let variants: any = [{ price, quantity, attributeValues: [] }];
     let noAttributes = false;
     if (isVariants) {
       variants = data.variants.map(i => {
-        // Check if attributes is empty
         if (i.attributeValues.length === 0) {
           noAttributes = true;
         }
@@ -780,7 +777,7 @@ const ImagePreview = ({ small, control, name, watch, defaultValue }: any) => {
               onChange={e => {
                 if (e.target.files && e.target.files[0]) {
                   const fileSize = e.target.files[0].size;
-                  const size = fileSize / 1024 / 1024; // in MiB
+                  const size = fileSize / 1024 / 1024;
                   if (size > 1) {
                     Swal.fire({
                       title: 'Hình ảnh vượt quá 1MB',
@@ -823,7 +820,6 @@ const CategorySelect = (props: any) => {
       {...props}
       value={props.value ? props.value : null}
       options={category}
-      // menuPortalTarget={document.querySelector('body')}
       menuPortalTarget={document.body}
       menuPosition={'fixed'}
       components={{
@@ -920,7 +916,6 @@ const AttributeSelect = (props: any) => {
   const handleChange = (selectedOption: any) => {
     props.onChange(selectedOption);
 
-    // if selection of a group is selected then remove that group
     let newGroupedOptions = [];
     newGroupedOptions = originalOptions?.filter((e: any) => {
       const found = e.options.find((k: any) => {

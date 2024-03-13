@@ -59,67 +59,12 @@ export class OrderController {
     return this.orderService.create(createOrderDto);
   }
 
-  // @Roles(Role.Admin, Role.User, Role.Manager, Role.Employee)
-  // @UseGuards(AccessTokenGuard, RolesGuard)
-  // @Post('zalopay/create-order')
-  // createZaloPayOrder(@Body() order) {
-  //   return this.orderService.createZaloPayOrder(order);
-  // }
-
-  // @Post('zalopay/callback')
-  // async zaloPayCallback(@Req() req: Request, @Res() res: Response) {
-  //   const result: any = {};
-  //   const key2 = process.env.ZALO_KEY2;
-
-  //   try {
-  //     const dataStr = req.body.data;
-  //     const reqMac = req.body.mac;
-
-  //     const mac = createHmac('sha256', key2).update(dataStr).digest('hex');
-
-  //     // kiểm tra callback hợp lệ (đến từ ZaloPay server)
-  //     if (reqMac !== mac) {
-  //       // callback không hợp lệ
-  //       result.returncode = -1;
-  //       result.returnmessage = 'mac not equal';
-  //     } else {
-  //       // thanh toán thành công
-  //       // merchant cập nhật trạng thái cho đơn hàng trong database
-  //       const dataJson = JSON.parse(dataStr);
-  //       const orderId = JSON.parse(dataJson['embed_data']).orderId;
-  //       const orderUpdate = new UpdateOrderStatusDto();
-  //       orderUpdate.isPaid = true;
-  //       orderUpdate.paidDate = new Date().toISOString();
-  //       await this.orderService.updateOrderStatus(orderId, orderUpdate);
-
-  //       result.returncode = 1;
-  //       result.returnmessage = 'success';
-  //     }
-  //   } catch (ex) {
-  //     result.returncode = 0;
-  //     result.returnmessage = ex.message;
-  //   }
-
-  //   // thông báo kết quả cho ZaloPay server
-  //   res.json(result);
-  // }
-
   @Roles(Role.Admin, Role.User, Role.Manager, Role.Employee)
   @UseGuards(AccessTokenGuard, RolesGuard)
   @Post('check-order-user')
   checkOrderUser(@Body() data) {
     return this.orderService.checkOrderUser(data);
   }
-
-  // @Post('momo/create-order')
-  // createMomoOrder(@Body() order) {
-  //   return this.orderService.createMomoOrder(order);
-  // }
-
-  // @Post('momo/callback')
-  // async momoCallback(@Req() req: Request, @Res() res: Response) {
-  //   console.log('OKOK');
-  // }
 
   @Roles(Role.Admin, Role.User, Role.Manager, Role.Employee)
   @UseGuards(AccessTokenGuard, RolesGuard)

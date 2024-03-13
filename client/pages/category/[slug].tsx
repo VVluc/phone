@@ -23,12 +23,11 @@ export default function Slug() {
   } = useSWR<CategoryType>(slug ? `${process.env.NEXT_PUBLIC_API_URL}/category/${slug}` : null, proFetcher);
 
   if (errorCate && errorCate.response && (errorCate.response.status === 400 || errorCate.response.status === 404)) {
-    mutateCate(() => undefined, { revalidate: false }); // Xóa cache nếu lỗi
+    mutateCate(() => undefined, { revalidate: false });
     router.push('/');
   }
 
   const renderData = () => {
-    // if (!products) return 'Loading...';
     if (products && products.length === 0) return 'Chưa có sản phẩm';
     return <ItemsList title={category?.name || ''} data={products} />;
   };

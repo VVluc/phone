@@ -25,7 +25,7 @@ export class AttributeValueService {
       .save(createAttributeValueDto)
       .then((res) => ({
         statusCode: HttpStatus.CREATED,
-        message: 'Register success',
+        message: 'dang ki thanh cong',
       }));
   }
 
@@ -36,7 +36,7 @@ export class AttributeValueService {
   async findOne(id: number) {
     const exist = await this.attributeValuesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Not found.');
+      throw new NotFoundException('khong tim thay');
     }
 
     return exist;
@@ -45,14 +45,14 @@ export class AttributeValueService {
   async update(id: number, updateAttributeValueDto: UpdateAttributeValueDto) {
     const exist = await this.attributeValuesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Not found.');
+      throw new NotFoundException('khong tim thay');
     }
 
     return this.attributeValuesRepository
       .update(id, updateAttributeValueDto)
       .then((res) => ({
         statusCode: HttpStatus.OK,
-        message: 'Update success',
+        message: 'cap nhat thanh cong',
       }))
       .catch((err) => console.log(err));
   }
@@ -60,7 +60,7 @@ export class AttributeValueService {
   async remove(id: number) {
     const exist = await this.attributeValuesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Not found.');
+      throw new NotFoundException('khong tim thay');
     }
 
     const existVariants = await this.variantRepo.findBy({
@@ -68,9 +68,7 @@ export class AttributeValueService {
     });
 
     if (existVariants.length > 0) {
-      throw new InternalServerErrorException(
-        "Can't delete because it's linked",
-      );
+      throw new InternalServerErrorException('khong the xoa');
     }
 
     try {
@@ -78,13 +76,11 @@ export class AttributeValueService {
         .delete({ id })
         .then((res) => ({
           statusCode: HttpStatus.OK,
-          message: 'Delete success',
+          message: 'xoa thanh cong',
         }));
     } catch (error) {
       if (error.errno === 1451) {
-        throw new InternalServerErrorException(
-          "Can't delete because it's linked",
-        );
+        throw new InternalServerErrorException('khong the xoa');
       }
       throw new InternalServerErrorException();
     }

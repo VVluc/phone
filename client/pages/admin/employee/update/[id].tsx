@@ -228,7 +228,6 @@ export default function Add() {
                     <Spacer y={1} />
                     <Input.Password
                       {...accountMethods.register('password')}
-                      // required
                       type="password"
                       label="Mật khẩu"
                       placeholder="Nhập mật khẩu mới"

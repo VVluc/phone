@@ -95,7 +95,6 @@ export const {
   clearCart,
 } = cartSlice.actions;
 
-// example: `useSelector((state: RootState) => state.counter.value)`
 export const selectCart = (state: AppState) => state.cart.cart;
 export const selectTotalAmount = (state: AppState) => state.cart.totalAmount;
 

@@ -51,7 +51,6 @@ const Page = ({ pageIndex, setPageIndex }: { pageIndex: number; setPageIndex: Di
             css={{
               textAlign: 'center',
               color: '#DB2612',
-              // textGradient: '45deg, $red600 50%, $yellow500 100%',
             }}
             weight="medium"
           >

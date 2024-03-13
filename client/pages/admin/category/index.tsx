@@ -26,7 +26,6 @@ import { CategoryType } from '../../../types';
 
 const MySwal = withReactContent(Swal);
 
-// IconButton component will be available as part of the core library soon
 export const IconButton = styled('button', {
   dflex: 'center',
   border: 'none',
@@ -226,8 +225,7 @@ const IndexPage: NextPage = () => {
                   {(column) => (
                     <Table.Column
                       key={column.uid}
-                      // hideHeader={column.uid === 'actions'}
-                      // align={column.uid === 'actions' ? 'center' : 'start'}
+                     
                     >
                       {column.name}
                     </Table.Column>

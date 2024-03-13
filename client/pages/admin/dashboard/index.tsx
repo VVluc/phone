@@ -447,7 +447,6 @@ const TopSellingProduct = () => {
         ))}
       </tbody>
     </table>
-    // <div></div>
   );
 };
 
@@ -543,7 +542,6 @@ const Admin: NextPage = () => {
                 <Row align="center" css={{ h: '100%', columnGap: 10 }}>
                   <GrBitcoin
                     size={45}
-                    // fill='var(--nextui-colors-secondaryLightContrast)'
                   />
                   <TotalRevenue />
                 </Row>
@@ -556,7 +554,6 @@ const Admin: NextPage = () => {
                 <Row align="center" css={{ h: '100%', columnGap: 10 }}>
                   <FaBoxOpen
                     size={45}
-                    // fill='var(--nextui-colors-secondaryLightContrast)'
                   />
                   <TotalOrders />
                 </Row>
@@ -569,7 +566,6 @@ const Admin: NextPage = () => {
                 <Row align="center" css={{ h: '100%', columnGap: 10 }}>
                   <GiBeachBag
                     size={45}
-                    // fill='var(--nextui-colors-secondaryLightContrast)'
                   />
                   <TotalProduct />
                 </Row>

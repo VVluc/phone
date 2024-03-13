@@ -72,7 +72,6 @@ export default function Profile() {
             mt: 50,
             textAlign: 'center',
             color: '#DB2612',
-            // textGradient: '45deg, $red600 50%, $yellow500 100%',S
           }}
           weight="medium"
         >
@@ -101,12 +100,7 @@ export default function Profile() {
                   </Grid>
 
                   <Grid xs={12} css={{ pt: 0, mt: 15 }}>
-                    <Button
-                      type="submit"
-                      auto
-                      // shadow
-                      color="secondary"
-                    >
+                    <Button type="submit" auto color="secondary">
                       Cập nhật
                     </Button>
                   </Grid>

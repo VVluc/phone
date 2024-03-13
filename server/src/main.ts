@@ -18,6 +18,5 @@ async function bootstrap() {
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
   await app.listen(process.env.APP_PORT);
-  // console.log('check host>>>',process.env.DB_HOST);
 }
 bootstrap();

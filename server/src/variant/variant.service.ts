@@ -26,24 +26,4 @@ export class VariantService {
       },
     });
   }
-
-  // create(createVariantDto: CreateVariantDto) {
-  //   return 'This action adds a new variant';
-  // }
-
-  // findAll() {
-  //   return `This action returns all variant`;
-  // }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} variant`;
-  // }
-
-  // update(id: number, updateVariantDto: UpdateVariantDto) {
-  //   return `This action updates a #${id} variant`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} variant`;
-  // }
 }

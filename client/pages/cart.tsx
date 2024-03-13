@@ -74,8 +74,7 @@ export default function Cart() {
     return items || [];
   }, [data, cart]);
 
-  // Track the product is still visible or not
-  // If not -> update cart
+
   useEffect(() => {
     if (data) {
       const ids = data?.map(i => i.id);

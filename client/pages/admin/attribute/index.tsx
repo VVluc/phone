@@ -30,7 +30,6 @@ import useAuth from '../../../libs/hooks/useAuth';
 
 const MySwal = withReactContent(Swal);
 
-// IconButton component will be available as part of the core library soon
 export const IconButton = styled('button', {
   dflex: 'center',
   border: 'none',
@@ -49,11 +48,9 @@ export const IconButton = styled('button', {
 });
 
 export const SendButton = styled('button', {
-  // reset button styles
   background: 'transparent',
   border: 'none',
   padding: 0,
-  // styles
   width: '24px',
   margin: '0 10px',
   dflex: 'center',

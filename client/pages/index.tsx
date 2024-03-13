@@ -81,7 +81,6 @@ export const ItemsList = ({ title, data }: ItemsListProps) => {
           css={{
             textAlign: 'center',
             color: '#DB2612',
-            // textGradient: '45deg, $600 50%, $yellow500 100%',
           }}
           weight="medium"
         >
@@ -207,7 +206,6 @@ const Articles = () => {
         css={{
           textAlign: 'center',
           color: '#DB2612',
-          // textGradient: '45deg, $red600 50%, $yellow500 100%',
         }}
         weight="medium"
       >

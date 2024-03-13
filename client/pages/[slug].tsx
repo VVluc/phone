@@ -8,7 +8,6 @@ import { useProduct } from '../libs/swr/useProduct';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
 import Swal from 'sweetalert2';
 import { FreeMode, Thumbs } from 'swiper';
 import 'swiper/css';
@@ -37,14 +36,12 @@ export default function Product() {
     }
   }, [product]);
 
-  // If Product not found, redirect user
   if (error && (error.response.status === 400 || error.response.status === 404)) {
     mutate(() => undefined, { revalidate: false });
     router.push('/');
   }
 
   const handleCartAddItem = (variantId: number) => {
-    // If the current product is not in the cart
     const currentVariant = cart.find(i => i.variantId === variantId);
     if (!currentVariant) {
       const newItem = {
@@ -56,8 +53,7 @@ export default function Product() {
       return;
     }
 
-    // If product is in the cart
-    // amount > 3, throw error
+
     if (currentVariant.quantity + amount > 3) {
       Swal.fire({
         title: 'Không thêm được vào giỏ hàng!',
@@ -203,9 +199,8 @@ export default function Product() {
             {/* <Text h2>Bình luận</Text>
             <Comment
               url={
-                process.env.NODE_ENV === 'development'
-                  ? 'https://developers.facebook.com/docs/plugins/comments#configurator'
-                  : window.location.href
+                
+                  'https://developers.facebook.com/docs/plugins/comments#configurator'
               }
             /> */}
           </Container>

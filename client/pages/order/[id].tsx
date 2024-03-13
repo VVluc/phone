@@ -19,24 +19,6 @@ export default function Id() {
   const { data: session } = useSession();
   const { data: order } = useOrder({ id, token: session?.accessToken });
 
-  const handleZaloPay = async () => {
-    if (!order) return;
-
-    try {
-      const { data }: any = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/order/zalopay/create-order`, order, {
-        headers: {
-          Authorization: `Bearer ${session?.accessToken}`,
-        },
-      });
-
-      if (data.order_url) {
-        window.open(data.order_url, '_self');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleMomo = async () => {
     if (!order) return;
 
@@ -57,15 +39,6 @@ export default function Id() {
 
   const handlePay = () => {
     if (!order) return;
-
-    switch (order.paymentMethod) {
-      case 'ZALOPAY':
-        handleZaloPay();
-        break;
-      case 'MOMO':
-        handleMomo();
-        break;
-    }
   };
   const isXs = useMediaQuery('(min-width: 650px)');
 
@@ -84,7 +57,6 @@ export default function Id() {
             mt: 50,
             textAlign: 'center',
             color: '#DB2612',
-            // textGradient: '45deg, $600 50%, $yellow500 100%',
           }}
           weight="medium"
         >

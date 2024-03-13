@@ -21,7 +21,6 @@ import { VariantModule } from './variant/variant.module';
       database: process.env.DB_SCHEMA,
       autoLoadEntities: true,
       synchronize: true,
-      // synchronize: process.env.NODE_ENV === 'development',
     }),
     UserModule,
     AuthModule,

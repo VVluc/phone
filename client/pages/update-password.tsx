@@ -65,7 +65,6 @@ export default function UpdatePassword() {
             mt: 50,
             textAlign: 'center',
             color: '#DB2612',
-            // textGradient: '45deg, $red600 50%, $yellow500 100%',
           }}
           weight="medium"
         >

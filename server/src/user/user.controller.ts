@@ -42,14 +42,6 @@ export class UserController {
     return this.userService.updatePassword(updatePasswordDto);
   }
 
-  // @Roles(Role.Admin)
-  // @UseGuards(AccessTokenGuard, RolesGuard)
-  // @UseInterceptors(ClassSerializerInterceptor)
-  // @Get()
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
-
   @UseGuards(AccessTokenGuard)
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')

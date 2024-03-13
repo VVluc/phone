@@ -152,9 +152,7 @@ export default function Add() {
                     />
 
                     <Spacer y={1} />
-                    <Button type="submit" 
-                    // shadow 
-                    auto color="secondary">
+                    <Button type="submit" auto color="secondary">
                       Thêm
                     </Button>
                   </Card.Body>

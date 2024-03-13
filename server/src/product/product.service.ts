@@ -7,7 +7,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {         
+import {
   IPaginationOptions,
   paginate,
   Pagination,
@@ -31,15 +31,6 @@ export class ProductService {
   ) {}
 
   async topSelling() {
-    // Select Product.name, SUM(OderItem.orderedQuantity) as sold
-    // from Product, Variant, OrderItem, Order
-    // where Product.id = Variant.productId
-    //    and Variant.id = OderItem.VariantId
-    //    and OderItem.OrderId = Order.id
-    // having sold > 0
-    // limit 6
-    // group by Product.name
-
     return this.productRepo
       .createQueryBuilder('product')
       .select('product.name', 'name')
@@ -145,7 +136,7 @@ export class ProductService {
       },
     });
     if (!exist) {
-      throw new NotFoundException('Product not found.');
+      throw new NotFoundException('khong tim thay san pham');
     }
 
     return exist;
@@ -165,7 +156,7 @@ export class ProductService {
       },
     });
     if (!exist) {
-      throw new NotFoundException('Product not found.');
+      throw new NotFoundException('khong tim thay san pham');
     }
 
     return exist;
@@ -185,7 +176,7 @@ export class ProductService {
       },
     });
     if (!exist) {
-      throw new NotFoundException('Product not found.');
+      throw new NotFoundException('khong tim thay san pham');
     }
 
     return exist;
@@ -214,12 +205,12 @@ export class ProductService {
     const name = await this.productRepo.findOneBy({
       name: createProductDto.name,
     });
-    if (name) throw new BadRequestException('Name already exist');
+    if (name) throw new BadRequestException('ten da ton tai ');
 
     const slug = await this.productRepo.findOneBy({
       slug: createProductDto.slug,
     });
-    if (slug) throw new BadRequestException('Slug already exist');
+    if (slug) throw new BadRequestException('Slug da ton tai');
 
     const { images, variants } = createProductDto;
 
@@ -234,8 +225,7 @@ export class ProductService {
         }
       }
     }
-    if (duplicateVariant)
-      throw new BadRequestException('Duplicate variant attributes');
+    if (duplicateVariant) throw new BadRequestException('loi thuoc tinh');
 
     await this.imageRepo.save(images);
     await this.variantRepo.save(variants);
@@ -245,7 +235,7 @@ export class ProductService {
   async update(id: number, updateProductDto: UpdateProductDto) {
     const exist = await this.productRepo.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Product not found.');
+      throw new NotFoundException('khong tim thay san pham');
     }
     const name = await this.productRepo
       .createQueryBuilder('product')
@@ -255,7 +245,7 @@ export class ProductService {
       })
       .getOne();
 
-    if (name) throw new BadRequestException('Name already exist');
+    if (name) throw new BadRequestException('ten da ton tai ');
 
     const slug = await this.productRepo
       .createQueryBuilder('product')
@@ -264,7 +254,7 @@ export class ProductService {
         slugExist: exist.slug,
       })
       .getOne();
-    if (slug) throw new BadRequestException('Slug already exist');
+    if (slug) throw new BadRequestException('Slug da ton tai');
 
     const { images, variants } = updateProductDto;
 
@@ -279,8 +269,7 @@ export class ProductService {
         }
       }
     }
-    if (duplicateVariant)
-      throw new BadRequestException('Duplicate variant attributes');
+    if (duplicateVariant) throw new BadRequestException('loi thuoc tinh');
 
     await this.imageRepo.save(images);
     await this.variantRepo.save(variants);
@@ -290,12 +279,12 @@ export class ProductService {
   async remove(id: number) {
     const exist = await this.productRepo.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Product not found.');
+      throw new NotFoundException('khong tim thay san pham');
     }
 
     return this.productRepo.delete({ id }).then((res) => ({
       statusCode: HttpStatus.OK,
-      message: 'Delete success',
+      message: 'xoa thanh cong',
     }));
   }
 

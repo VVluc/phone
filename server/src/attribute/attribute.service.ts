@@ -22,11 +22,11 @@ export class AttributeService {
     const name = await this.attributesRepository.findOneBy({
       name: createAttributeDto.name,
     });
-    if (name) throw new BadRequestException('Name already exist');
+    if (name) throw new BadRequestException('ten da ton tai ');
 
     return this.attributesRepository.save(createAttributeDto).then((res) => ({
       statusCode: HttpStatus.CREATED,
-      message: 'Register success',
+      message: 'dang ki thanh cong',
     }));
   }
 
@@ -42,7 +42,7 @@ export class AttributeService {
   async findOne(id: number): Promise<Attribute> {
     const exist = await this.attributesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Attribute not found.');
+      throw new NotFoundException('khong tim thay thuoc tinh');
     }
 
     return exist;
@@ -51,7 +51,7 @@ export class AttributeService {
   async update(id: number, updateAttributeDto: UpdateAttributeDto) {
     const exist = await this.attributesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Attribute not found.');
+      throw new NotFoundException('khong tim thay thuoc tinh');
     }
     const name = await this.attributesRepository
       .createQueryBuilder('attribute')
@@ -60,13 +60,13 @@ export class AttributeService {
         nameExist: exist.name,
       })
       .getOne();
-    if (name) throw new BadRequestException('Name already exist');
+    if (name) throw new BadRequestException('ten da ton tai');
 
     return this.attributesRepository
       .update(id, updateAttributeDto)
       .then((res) => ({
         statusCode: HttpStatus.OK,
-        message: 'Update success',
+        message: 'cap nhat thanh cong',
       }))
       .catch((err) => console.log(err));
   }
@@ -74,19 +74,17 @@ export class AttributeService {
   async remove(id: number) {
     const exist = await this.attributesRepository.findOneBy({ id });
     if (!exist) {
-      throw new NotFoundException('Product not found.');
+      throw new NotFoundException('khong tim thay san pham');
     }
 
     try {
       return await this.attributesRepository.delete({ id }).then((res) => ({
         statusCode: HttpStatus.OK,
-        message: 'Delete success',
+        message: 'xoa thanh cong',
       }));
     } catch (error) {
       if (error.errno === 1451) {
-        throw new InternalServerErrorException(
-          "Can't delete because it's linked",
-        );
+        throw new InternalServerErrorException('khong the xoa');
       }
       throw new InternalServerErrorException();
     }

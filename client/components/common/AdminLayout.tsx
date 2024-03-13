@@ -105,7 +105,7 @@ const SideBar = () => {
             <Spacer y={1} />
           </>
         )}
-        <Button
+        {/* <Button
           onPress={() => router.push('/admin/setting')}
           icon={<AiOutlineSetting />}
           css={{
@@ -115,7 +115,7 @@ const SideBar = () => {
           ripple={false}
         >
           Cài đặt
-        </Button>
+        </Button> */}
       </Card.Body>
     </Card>
   );

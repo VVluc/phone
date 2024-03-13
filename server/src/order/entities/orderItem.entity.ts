@@ -23,7 +23,7 @@ export class OrderItem {
   public order!: Order;
 
   @ManyToOne(() => Variant, (variant) => variant.orderItems, {
-    onDelete: 'CASCADE', // hoặc 'SET NULL' nếu cần
+    onDelete: 'CASCADE',
   })
   public variant!: Variant;
 }
