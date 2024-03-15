@@ -5,10 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useBotChat } from '../../components/common/BotChat';
 
 export default function Login() {
-  useBotChat(false);
   const [error, setError] = useState<string | null>();
   const [loaded, setLoaded] = useState<boolean>(false);
   const router = useRouter();
@@ -30,7 +28,7 @@ export default function Login() {
     } else {
       const session = await getSession();
       if (session && session.roles.some((e: string) => e === 'admin' || e === 'manager' || e === 'employee')) {
-        const name = (router.query.name as string) || '/admin/dashboard';
+        const name = '/admin/dashboard';
         router.replace(name);
       } else if (session && session.roles.includes('user')) {
         const name = (router.query.name as string) || '/';
@@ -50,15 +48,9 @@ export default function Login() {
   return (
     <>
       <section className="container">
-        {/* <div className="bg-preview">
-          {!loaded && <Image src="/kata-preview.jpg" layout="fill" priority alt="video preview image" objectFit="cover" />}
+        <div className="bg-preview">
+          {!loaded && <Image src="/login.jpg" layout="fill" priority alt="video preview image" objectFit="cover" />}
         </div>
-
-        <video className="video" autoPlay muted loop onLoadedData={() => setLoaded(true)}>
-          <source src="/katarina.mp4" type="video/mp4" />
-          Your browser does not support HTML5 video.
-        </video> */}
-
         <form autoComplete="off" autoSave="off" onSubmit={handleSubmit(onSubmit)}>
           <Card css={{ width: '300px' }}>
             {error && (
@@ -67,9 +59,7 @@ export default function Login() {
               </Card.Header>
             )}
             <Card.Header css={{ justifyContent: 'center' }}>
-              <Text b color="secondary">
-                Đăng nhập
-              </Text>
+              <Text color="secondary">Đăng nhập</Text>
             </Card.Header>
             <Card.Divider />
             <Card.Body css={{ py: '$10' }}>
@@ -115,42 +105,9 @@ export default function Login() {
               </Row>
             </Card.Footer>
             <Card.Divider />
-            <Card.Footer css={{ flexDirection: 'column', gap: 5 }}>
-              {/* <Text small>
-                Trang admin:
-                <Text b style={{ marginLeft: 5 }}>
-                  /admin/dashboard
-                </Text>
-              </Text>
-
-              <Text small>
-                Acc client:
-                <Text b style={{ marginLeft: 5 }}>
-                  username1 - Username1
-                </Text>
-              </Text>
-
-              <Text small>
-                Acc admin:
-                <Text b style={{ marginLeft: 5 }}>
-                  admin123 - Admin123
-                </Text>
-              </Text>
-
-              <Text small>
-                Acc quản lý:
-                <Text b style={{ marginLeft: 5 }}>
-                  manager1 - Manager1
-                </Text>
-              </Text>
-
-              <Text small>
-                Acc nhân viên:
-                <Text b style={{ marginLeft: 5 }}>
-                  employee1 - Employee1
-                </Text>
-              </Text> */}
-            </Card.Footer>
+            {/* <Card.Footer css={{ flexDirection: 'column', gap: 5 }}>
+            
+            </Card.Footer> */}
           </Card>
         </form>
       </section>
@@ -164,8 +121,6 @@ export default function Login() {
           height: 100vh;
           overflow: hidden;
         }
-      
-      
       `}</style>
     </>
   );

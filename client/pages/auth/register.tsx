@@ -6,10 +6,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { useBotChat } from '../../components/common/BotChat';
 
 export default function Register() {
-  useBotChat(false);
   const router = useRouter();
   const [error, setError] = useState<string[] | string>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -38,13 +36,7 @@ export default function Register() {
   return (
     <>
       <section className="container">
-        {/* <div className="bg-preview">
-          {!loaded && <Image src="/ahri-preview.jpg" layout="fill" priority alt="video preview image" objectFit="cover" />}
-        </div>
-        <video className="video" autoPlay muted loop onLoadedData={() => setLoaded(true)}>
-          <source src="/ahri.mp4" type="video/mp4" />
-          Your browser does not support HTML5 video.
-        </video> */}
+        <div className="bg-preview">{!loaded && <Image src="/login.jpg" layout="fill" priority objectFit="cover" />}</div>
 
         <form autoComplete="off" autoSave="off" onSubmit={handleSubmit(onSubmit)} className="card-form">
           <Card>

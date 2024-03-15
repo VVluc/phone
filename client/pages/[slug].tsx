@@ -15,7 +15,6 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import Comment from '../components/common/Comment';
-import LikeShare from '../components/common/LikeShare';
 import { addItemToCart, selectCart } from '../libs/redux/reducers/cartReducer';
 import { useAppDispatch, useAppSelector } from '../libs/redux/store';
 import { VariantType } from '../types';
@@ -52,7 +51,6 @@ export default function Product() {
       dispatch(addItemToCart(newItem));
       return;
     }
-
 
     if (currentVariant.quantity + amount > 3) {
       Swal.fire({
@@ -125,13 +123,6 @@ export default function Product() {
               {/* <Spacer y={2} /> */}
               <Grid xs={12} sm={6} direction="column">
                 <Text h2>{product.name}</Text>
-                {/* <LikeShare
-                  url={
-                    process.env.NODE_ENV === 'development'
-                      ? 'https://developers.facebook.com/docs/plugins/'
-                      : window.location.href
-                  }
-                /> */}
 
                 {product.variants.length === 1 && product.variants[0].attributeValues.length === 0 ? null : (
                   <>
@@ -196,13 +187,8 @@ export default function Product() {
             <Text h2>Mô tả</Text>
             <Row>{product.description}</Row>
             <Spacer y={4} />
-            {/* <Text h2>Bình luận</Text>
-            <Comment
-              url={
-                
-                  'https://developers.facebook.com/docs/plugins/comments#configurator'
-              }
-            /> */}
+            <Text h2>Bình luận</Text>
+            <Comment url={'https://developers.facebook.com/docs/plugins/comments#configurator'} />
           </Container>
         ) : (
           'Loading...'

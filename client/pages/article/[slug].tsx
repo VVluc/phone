@@ -17,10 +17,7 @@ export default function Slug() {
     error,
     mutate,
     isValidating,
-  } = useSWR<ArticleType>(
-    slug ? [`/article`, slug] : null,
-    (url, slugPara: string) => getArticleBySlug(slugPara)
-  );
+  } = useSWR<ArticleType>(slug ? [`/article`, slug] : null, (url, slugPara: string) => getArticleBySlug(slugPara));
 
   if (!article) return <div>Loading...</div>;
 
@@ -28,46 +25,29 @@ export default function Slug() {
     <>
       <Head>
         <title>{slug}</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <UserLayout>
         <Container sm css={{ mt: 50, mb: 20 }}>
-          <Image
-            height={504}
-            autoResize
-            src={article?.bannerImage.url || ''}
-            alt='Default Image'
-            objectFit='cover'
-          />
+          <Image height={504} autoResize src={article?.bannerImage.url || ''} alt="Default Image" objectFit="cover" />
         </Container>
         <Container xs>
           <Text h2>{article?.title}</Text>
 
           <div style={{ display: 'flex', marginBottom: '25px', columnGap: 5 }}>
             <div style={{ borderRadius: '50%', overflow: 'hidden' }}>
-              <Image
-                width={24}
-                height={24}
-                src={article?.createdBy.picture || ''}
-                alt=''
-                objectFit='cover'
-              />
+              <Image width={24} height={24} src={article?.createdBy.picture || ''} alt="" objectFit="cover" />
             </div>
 
-            <Text
-              as='time'
-              css={{ fontStyle: 'italic', display: 'inline-block' }}
-              color='$accents7'
-            >
-              {article?.createdBy.name} -{' '}
-              {dayPublish(article?.publishedAt || '')}
+            <Text as="time" css={{ fontStyle: 'italic', display: 'inline-block' }} color="$accents7">
+              {article?.createdBy.name} - {dayPublish(article?.publishedAt || '')}
             </Text>
           </div>
 
           <RichText content={article?.content.json.children} />
 
-          {/* <div style={{ marginTop: 50 }}>
+          <div style={{ marginTop: 50 }}>
             <Comment
               url={
                 process.env.NODE_ENV === 'development'
@@ -75,7 +55,7 @@ export default function Slug() {
                   : window.location.href
               }
             />
-          </div> */}
+          </div>
         </Container>
       </UserLayout>
     </>

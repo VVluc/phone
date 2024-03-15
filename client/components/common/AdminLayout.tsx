@@ -7,7 +7,6 @@ import { BiCategoryAlt } from 'react-icons/bi';
 import { GiFlowerTwirl } from 'react-icons/gi';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { RiProductHuntLine } from 'react-icons/ri';
-import { useBotChat } from './BotChat';
 import Logo from './Logo';
 
 const SideBar = () => {
@@ -127,7 +126,6 @@ interface Props {
 }
 
 const AdminLayout: NextPage<Props> = ({ children, title }) => {
-  useBotChat(false);
 
   const handleSignOut = () => {
     signOut({ redirect: false });

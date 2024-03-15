@@ -13,7 +13,6 @@ import { selectTotalAmount } from '../../libs/redux/reducers/cartReducer';
 import { useAppSelector } from '../../libs/redux/store';
 import { useCategory } from '../../libs/swr/useCategory';
 import { useProducts } from '../../libs/swr/useProducts';
-import { BotChat, useBotChat } from './BotChat';
 import Footer from './Footer';
 import Logo from './Logo';
 
@@ -372,8 +371,6 @@ const MyNavbar = () => {
 };
 
 const UserLayout: NextPage<Props> = ({ children }) => {
-  useBotChat(true);
-
   return (
     <>
       <MyNavbar />
@@ -383,7 +380,6 @@ const UserLayout: NextPage<Props> = ({ children }) => {
       <Spacer y={6} />
       <Footer />
       <ScrollToTop smooth color="#6f00ff" />
-      <BotChat />
 
       <style jsx global>{`
         .scroll-to-top {

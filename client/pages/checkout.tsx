@@ -221,7 +221,7 @@ const Info = () => {
       setValue('district', null);
       // setDistricts(res.data.districts);
       setValue('ward', null);
-      setWards([]);
+      // setWards([]);
     } catch (error) {
       console.log(error);
     }
